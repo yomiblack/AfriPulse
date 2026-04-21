@@ -4,7 +4,7 @@ A research and comparison intelligence dashboard covering all 59 African countri
 Built as a production-grade Vue 3 application mirroring the architecture of real-world
 African economic data platforms.
 
-🔗 **Live Demo:** [https://afripulse-rust.vercel.app](https://afripulse-rust.vercel.app)
+🔗 **Live Demo:** [https://afripulse-eight.vercel.app](https://afripulse-eight.vercel.app)
 
 ---
 
@@ -20,6 +20,7 @@ portfolio product built with the same tools and patterns used in production Vue 
 ## Features
 
 ### ✅ Live (Week 1)
+
 - Country listing for all 54 African nations sourced from the REST Countries API
 - Live search with reactive filtering by country name
 - Subregion sidebar navigation with active state highlighting
@@ -30,6 +31,7 @@ portfolio product built with the same tools and patterns used in production Vue 
 - Tailwind CSS throughout — dark mode, responsive grid, utility-first styling
 
 ### 🚧 In Progress (Week 2)
+
 - Multi-country comparison tool
 - 10-year GDP time-series charts via World Bank Indicators API (Chart.js)
 - Pinia-persisted favourites and watchlist
@@ -37,6 +39,7 @@ portfolio product built with the same tools and patterns used in production Vue 
 - Responsive grid and dark mode refinements
 
 ### 📅 Planned (Weeks 3–4)
+
 - Cmd+K command palette (Teleport + provide/inject)
 - Reactive SVG choropleth map of Africa
 - Virtualised list with v-memo and IntersectionObserver
@@ -48,17 +51,17 @@ portfolio product built with the same tools and patterns used in production Vue 
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Vue 3 (Composition API) |
-| Language | TypeScript |
-| State Management | Pinia |
-| Routing | Vue Router 4 |
-| Styling | Tailwind CSS v3 |
-| Charts | Chart.js |
-| Build Tool | Vite |
-| Testing | Vitest |
-| Deployment | Vercel |
+| Layer            | Technology              |
+| ---------------- | ----------------------- |
+| Framework        | Vue 3 (Composition API) |
+| Language         | TypeScript              |
+| State Management | Pinia                   |
+| Routing          | Vue Router 4            |
+| Styling          | Tailwind CSS v3         |
+| Charts           | Chart.js                |
+| Build Tool       | Vite                    |
+| Testing          | Vitest                  |
+| Deployment       | Vercel                  |
 
 ---
 
