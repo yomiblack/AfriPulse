@@ -1,6 +1,6 @@
 # AfriPulse 🌍
 
-A research and comparison intelligence dashboard covering all 54 African countries.
+A research and comparison intelligence dashboard covering all 59 African countries.
 Built as a production-grade Vue 3 application mirroring the architecture of real-world
 African economic data platforms.
 
