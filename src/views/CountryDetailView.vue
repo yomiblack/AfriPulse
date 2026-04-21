@@ -36,8 +36,8 @@ const languageList = computed(() =>
 );
 
 const isFavourite = computed(() =>
-    country.value ? store.isFavourite(country.value.cca2) : false
-)
+  country.value ? store.isFavourite(country.value.cca2) : false
+);
 
 function navigateToBorder(cca3: string) {
   const borderCountry = store.countries.find((c) => c.cca3 === cca3);

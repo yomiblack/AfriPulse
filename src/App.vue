@@ -1,4 +1,3 @@
-<!-- src/App.vue — updated -->
 <script setup lang="ts">
 import DarkModeToggle from '@/components/DarkModeToggle.vue';
 import { useDarkMode } from '@/composables/useDarkMode';
