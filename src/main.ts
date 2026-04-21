@@ -1,10 +1,11 @@
-import { createApp } from 'vue';
-import { createPinia } from 'pinia';
-import { router } from '@/router';
-import App from './App.vue';
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { router } from '@/router'
+import App from './App.vue'
+import '@/assets/main.css'
 
-const app = createApp(App);
+const app = createApp(App)
 
-app.use(createPinia()); // register Pinia globally — all stores now available
-app.use(router); // register Vue Router
-app.mount('#app');
+app.use(createPinia()) // register Pinia globally — all stores now available
+app.use(router)        // register Vue Router
+app.mount('#app')
