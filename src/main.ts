@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { router } from '@/router';
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from '@vercel/analytics/vue';
 import App from './App.vue';
 import '@/assets/main.css';
 
