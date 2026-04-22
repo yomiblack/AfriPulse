@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DarkModeToggle from '@/components/DarkModeToggle.vue';
 import { useDarkMode } from '@/composables/useDarkMode';
+import { Analytics } from '@vercel/analytics/next';
 
 useDarkMode();
 </script>
@@ -27,6 +28,7 @@ useDarkMode();
             Intelligence dashboard for African countries.
           </p>
         </RouterLink>
+        <Analytics />
         <DarkModeToggle />
       </div>
     </nav>
