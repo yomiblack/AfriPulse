@@ -16,7 +16,7 @@ const routes = [
   },
 
   {
-    path: '/countries:cca2',
+    path: '/countries/:cca2',
     name: 'country-details',
     component: CountryDetailView,
   },

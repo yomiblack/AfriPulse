@@ -1,25 +1,31 @@
-import { onMounted } from "vue";
-import { useCountriesStore } from "@/stores/countries";
-import { storeToRefs } from "pinia";
+import { onMounted } from 'vue';
+import { useCountriesStore } from '@/stores/countries';
+import { storeToRefs } from 'pinia';
 
 export function useCountries() {
-    const store = useCountriesStore()
-    
-    const {filteredCountries, isLoading, error, selectedRegion, searchQuery, africanSubregions} = storeToRefs(store)
+  const store = useCountriesStore();
 
-    onMounted(() => {
-        store.fetchCountries()
-    })
+  const {
+    filteredCountries,
+    isLoading,
+    error,
+    selectedRegion,
+    searchQuery,
+    africanSubregions,
+  } = storeToRefs(store);
 
-    return {
-        filteredCountries,
-        isLoading,
-        error,
-        selectedRegion,
-        searchQuery,
-        africanSubregions,
-        setRegion: store.setRegion,
-        setSearch: store.setSearch,
-    }
+  onMounted(() => {
+    store.fetchCountries();
+  });
+
+  return {
+    filteredCountries,
+    isLoading,
+    error,
+    selectedRegion,
+    searchQuery,
+    africanSubregions,
+    setRegion: store.setRegion,
+    setSearch: store.setSearch,
+  };
 }
-

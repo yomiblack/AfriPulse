@@ -43,7 +43,7 @@ function navigateToBorder(cca3: string) {
   const borderCountry = store.countries.find((c) => c.cca3 === cca3);
   if (borderCountry) {
     router.push({
-      name: 'country-detail',
+      name: 'country-details',
       params: { cca2: borderCountry.cca2 },
     });
   }
