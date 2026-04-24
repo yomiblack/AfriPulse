@@ -9,7 +9,10 @@ const router = useRouter();
 
 const code = computed(() => route.params.cca2 as string);
 
-const { country, loading, error } = useCountryDetail(code);
+const { country, error, initialFetch } = useCountryDetail(code);
+
+await initialFetch;
+
 const store = useCountriesStore();
 
 const formattedPopulation = computed(() =>
@@ -90,18 +93,9 @@ function toggleFavourite() {
     </header>
 
     <main>
-      <!-- ── LOADING STATE ──────────────────────────────────────────────── -->
-      <div v-if="loading" class="space-y-6 animate-pulse">
-        <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded w-64" />
-        <div class="h-64 bg-gray-200 dark:bg-gray-700 rounded-2xl" />
-        <div class="grid grid-cols-2 gap-4">
-          <div class="h-32 bg-gray-200 dark:bg-gray-700 rounded-xl" />
-          <div class="h-32 bg-gray-200 dark:bg-gray-700 rounded-xl" />
-        </div>
-      </div>
       <!-- ── ERROR STATE ────────────────────────────────────────────────── -->
       <div
-        v-else-if="error"
+        v-if="error"
         class="flex flex-col items-center justify-between py-24 text-center gap-4"
       >
         <p class="text-5xl">🌍</p>

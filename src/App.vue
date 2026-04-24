@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import DarkModeToggle from '@/components/DarkModeToggle.vue';
+import AppLoader from './components/AppLoader.vue';
+import AppError from './components/AppError.vue';
 import { useDarkMode } from '@/composables/useDarkMode';
 import { Analytics } from '@vercel/analytics/vue';
+import { ref } from 'vue';
 
 useDarkMode();
+
+const suspenseError = ref<Error | null>(null);
+
+function onSuspenseError(err: unknown) {
+  suspenseError.value = err instanceof Error ? err : new Error(String(err));
+}
 </script>
 
 <template>
@@ -32,7 +41,14 @@ useDarkMode();
         <DarkModeToggle />
       </div>
     </nav>
-
-    <RouterView />
+    <Suspense @error="onSuspenseError">
+      <template #default>
+        <RouterView />
+      </template>
+      <template #fallback>
+        <AppLoader />
+      </template>
+    </Suspense>
+    <AppError v-if="suspenseError" :error="suspenseError" />
   </div>
 </template>

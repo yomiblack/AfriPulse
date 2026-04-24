@@ -1,7 +1,23 @@
+import { defineAsyncComponent } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import AppLoader from '@/components/AppLoader.vue';
+import AppError from '@/components/AppError.vue';
 
-const CountriesView = () => import('@/views/CountriesView.vue');
-const CountryDetailView = () => import('@/views/CountryDetailView.vue');
+const CountriesView = defineAsyncComponent({
+  loader: () => import('@/views/CountriesView.vue'),
+  loadingComponent: AppLoader,
+  errorComponent: AppError,
+  delay: 200,
+  timeout: 8000,
+});
+
+const CountryDetailView = defineAsyncComponent({
+  loader: () => import('@/views/CountryDetailView.vue'),
+  loadingComponent: AppLoader,
+  errorComponent: AppError,
+  delay: 200,
+  timeout: 8000,
+});
 
 const routes = [
   {
