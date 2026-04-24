@@ -20,8 +20,8 @@ const {
   <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Toolbar -->
     <div class="mt-8">
-      <SearchBar v-model="searchQuery" @update:model-value="setSearch" />
-      <p>
+      <SearchBar v-model="searchQuery" />
+      <p class="text-sm my-2 text-gray-500 dark:text-gray-400 shrink-0">
         <span v-if="isLoading">Loading...</span>
         <span v-else>{{ filteredCountries.length }} countries</span>
       </p>

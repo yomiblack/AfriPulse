@@ -62,13 +62,13 @@ function getPrimaryLanguage(languages: CountryCard['languages']): string {
           </dd>
         </div>
         <div class="flex justify-between">
-          <dt class="text-gray-500 dark:gray-400">Population</dt>
+          <dt class="text-gray-500 dark:text-gray-400">Population</dt>
           <dd class="font-medium text-gray-800 dark:text-gray-200">
             {{ formatPopulation(country.population) }}
           </dd>
         </div>
         <div class="flex justify-between">
-          <dt class="text-gray-500 dark:text-gray400">Subregion</dt>
+          <dt class="text-gray-500 dark:text-gray-400">Subregion</dt>
           <dd
             class="font-medium text-gray-800 dark:text-gray-200 truncate ml-2"
           >

@@ -56,7 +56,7 @@ function toggleFavourite() {
 </script>
 
 <template>
-  <div class="p-2 min-h-screen bg-gray-50 dark:bg-gray-900">
+  <div class="px-2 min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- ── STICKY HEADER NAV ───────────────────────────────────────────── -->
     <header
       class="sticky top-0 z-10 bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-200 dark:border-gray-700"
@@ -66,11 +66,11 @@ function toggleFavourite() {
       >
         <RouterLink
           to="/countries"
-          class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-text-brand-400 transition-colors"
+          class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors"
         >
           <!-- ← Back label -->
-          <spsn class="text-lg leading-none">←</spsn>
-          <spsn>All countries</spsn>
+          <span class="text-lg leading-none">←</span>
+          <span>All countries</span>
         </RouterLink>
         <!-- Favourite toggle -->
         <button
@@ -123,7 +123,7 @@ function toggleFavourite() {
           <img
             :src="country.flags.svg || country.flags.png"
             :alt="country.flags.alt ?? `Flag of ${country.name.common}`"
-            class="w-full sm:w-48 h-32 object-cover rounded-xl shadow-md border birder-gray-200 dark:border-gray-700 flex-shrink-0"
+            class="w-full sm:w-48 h-32 object-cover rounded-xl shadow-md border border-gray-200 dark:border-gray-700 flex-shrink-0"
           />
           <div class="flex-1 min-w-0">
             <h1

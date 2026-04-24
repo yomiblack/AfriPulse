@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+defineOptions({ inheritAttrs: false });
+
 const props = withDefaults(
   defineProps<{
     subregions: string[];
