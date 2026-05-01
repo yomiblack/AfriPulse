@@ -2,7 +2,9 @@
 import DarkModeToggle from '@/components/DarkModeToggle.vue';
 import AppLoader from './components/AppLoader.vue';
 import AppError from './components/AppError.vue';
+import CompareBar from '@/components/CompareBar.vue';
 import { useDarkMode } from '@/composables/useDarkMode';
+import { provideComparison } from '@/composables/useComparison';
 import { Analytics } from '@vercel/analytics/vue';
 import { ref } from 'vue';
 import { useCountriesStore } from './stores/countries';
@@ -10,6 +12,7 @@ import { storeToRefs } from 'pinia';
 import { RouterLink } from 'vue-router';
 
 useDarkMode();
+provideComparison();
 
 const store = useCountriesStore();
 const { favouriteCountries } = storeToRefs(store);
@@ -63,7 +66,15 @@ function onSuspenseError(err: unknown) {
                 }}
               </span>
             </RouterLink>
+            <RouterLink
+              to="/compare"
+              exact-active-class="bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400"
+              class="px-3 py-1.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              Compare
+            </RouterLink>
           </div>
+          <CompareBar />
         </div>
 
         <div>

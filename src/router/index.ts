@@ -1,8 +1,8 @@
 import { defineAsyncComponent } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import AppLoader from '@/components/AppLoader.vue';
-import AppError from '@/components/AppError.vue';
 import { useCountriesStore } from '@/stores/countries';
+import AppError from '@/components/AppError.vue';
 
 const CountriesView = defineAsyncComponent({
   loader: () => import('@/views/CountriesView.vue'),
@@ -22,6 +22,14 @@ const CountryDetailView = defineAsyncComponent({
 
 const favouritesView = defineAsyncComponent({
   loader: () => import('@/views/FavouritesView.vue'),
+  loadingComponent: AppLoader,
+  errorComponent: AppError,
+  delay: 200,
+  timeout: 8000,
+});
+
+const compareView = defineAsyncComponent({
+  loader: () => import('@/views/CompareView.vue'),
   loadingComponent: AppLoader,
   errorComponent: AppError,
   delay: 200,
@@ -56,6 +64,12 @@ const routes = [
         return { name: 'countries' };
       }
     },
+  },
+
+  {
+    path: '/compare',
+    name: 'compare',
+    component: compareView,
   },
 ];
 
