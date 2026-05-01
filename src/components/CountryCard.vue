@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import type { CountryCard } from '@/types/country';
+import { useComparison } from '@/composables/useComparison';
 
 const props = defineProps<{
   country: CountryCard;
 }>();
+
+const { isSelected, isFull, toggle } = useComparison();
 
 function formatPopulation(n: number): string {
   return new Intl.NumberFormat('en-US', {
@@ -23,9 +26,26 @@ function getPrimaryLanguage(languages: CountryCard['languages']): string {
 </script>
 
 <template>
+  <div class="relative group/card">
+    <!-- Compare toggle button — sits above the card, revealed on hover -->
+    <button
+      @click.prevent="toggle(country)"
+      :disabled="isFull && !isSelected(country.cca2)"
+      :aria-label="`${isSelected(country.cca2) ? 'Remove from' : 'Add to'} comparison`"
+      class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-150 opacity-0 group-hover/card:opacity-100 focus:opacity-100"
+      :class="
+        isSelected(country.cca2)
+          ? 'bg-brand-500 text-white shadow-md'
+          : 'bg-white/90 dark:bg-gray-800/90 text-gray-500 dark:text-gray-400 hover:bg-brand-50 hover:text-brand-600 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed'
+      "
+    >
+      {{ isSelected(country.cca2) ? '✓' : '+' }}
+    </button>
+
   <RouterLink
     :to="{ name: 'country-details', params: { cca2: country.cca2 } }"
     class="group block rounded-2xl overflow-hidden bg-white dark:bg-surface-dark-muted border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
+    :class="isSelected(country.cca2) ? 'ring-2 ring-brand-500' : ''"
   >
     <!-- Flag Image -->
     <div
@@ -95,4 +115,5 @@ function getPrimaryLanguage(languages: CountryCard['languages']): string {
       </div>
     </div>
   </RouterLink>
+  </div>
 </template>
