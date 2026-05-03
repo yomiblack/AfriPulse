@@ -3,6 +3,8 @@ import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useCountriesStore } from '@/stores/countries';
 import { useCountryDetail } from '@/composables/useCountryDetail';
+import { useWorldBank } from '@/composables/useWorldBank';
+import GdpChart from '@/components/GdpChart.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -10,6 +12,7 @@ const router = useRouter();
 const code = computed(() => route.params.cca2 as string);
 
 const { country, error, initialFetch } = useCountryDetail(code);
+const { gdpSeries, isLoading: gdpLoading } = useWorldBank(code);
 
 await initialFetch;
 
@@ -176,7 +179,24 @@ function toggleFavourite() {
             </p>
           </div>
         </div>
-
+        <!-- Gdp Chart -->
+        <div
+          v-if="gdpLoading"
+          class="rounded-xl bg-gray-100 dark:bg-slate-800 animate-pulse h-56"
+        />
+        <GdpChart
+          v-else-if="gdpSeries.length > 0"
+          :series="gdpSeries"
+          :country-name="country?.name.common ?? ''"
+        />
+        <div
+          v-else
+          class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 border border-dashed border-gray-200 dark:border-gray-700 text-center"
+        >
+          <p class="text-sm text-gray-400 dark:text-gray-500">
+            GDP data not available for {{ country?.name.common }}
+          </p>
+        </div>
         <!-- Details two-column -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Language & Currencies -->

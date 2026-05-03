@@ -7,7 +7,7 @@ export interface GdpDataPoint {
   gdpPerCapita: number | null;
 }
 
-export function useWorldBanks(cca2: Ref<string>) {
+export function useWorldBank(cca2: Ref<string>) {
   const gdpSeries = ref<GdpDataPoint[]>([]);
   const isLoading = ref(false);
   const error = ref<string | null>(null);
