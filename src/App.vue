@@ -2,14 +2,14 @@
 import DarkModeToggle from '@/components/DarkModeToggle.vue';
 import AppLoader from './components/AppLoader.vue';
 import AppError from './components/AppError.vue';
-import CompareBar from '@/components/CompareBar.vue';
 import { useDarkMode } from '@/composables/useDarkMode';
-import { provideComparison } from '@/composables/useComparison';
 import { Analytics } from '@vercel/analytics/vue';
 import { ref } from 'vue';
-import { useCountriesStore } from './stores/countries';
+import { useCountriesStore } from '@/stores/countries';
 import { storeToRefs } from 'pinia';
 import { RouterLink } from 'vue-router';
+import { provideComparison } from '@/composables/useComparison';
+import CompareBar from './components/CompareBar.vue';
 
 useDarkMode();
 provideComparison();
@@ -32,27 +32,31 @@ function onSuspenseError(err: unknown) {
       class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors"
     >
       <div
-        class="max-w-screen-xl mx-auto px-6 h-14 flex items-center justify-between"
+        class="max-w-screen-xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4"
       >
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2 sm:gap-6 min-w-0">
           <RouterLink
             to="/countries"
-            class="text-xl font-bold text-gray-900 dark:text-gray-100 tracking-tight leading-none"
+            class="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 tracking-tight leading-none shrink-0"
           >
-            AfriPulse</RouterLink
-          >
+            AfriPulse
+          </RouterLink>
 
-          <div class="flex items-center gap-1">
+          <div
+            class="flex items-center gap-0.5 sm:gap-1 overflow-x-auto scrollbar-none"
+          >
             <RouterLink
               to="/countries"
-              exact-active-class="bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400"
-              class="px-3 py-1.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              >Countries</RouterLink
+              active-class="bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400"
+              class="shrink-0 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
             >
+              Countries
+            </RouterLink>
+
             <RouterLink
               to="/favourites"
-              exact-active-class="bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400"
-              class="px-3 py-1.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-1.5"
+              active-class="bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400"
+              class="shrink-0 flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
             >
               Saved
               <span
@@ -66,33 +70,35 @@ function onSuspenseError(err: unknown) {
                 }}
               </span>
             </RouterLink>
+
             <RouterLink
               to="/compare"
-              exact-active-class="bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400"
-              class="px-3 py-1.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              active-class="bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400"
+              class="shrink-0 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
             >
               Compare
             </RouterLink>
           </div>
-          <CompareBar />
         </div>
 
-        <div>
+        <div class="shrink-0">
           <Analytics />
           <DarkModeToggle />
         </div>
       </div>
     </nav>
 
+    <CompareBar />
+
     <Suspense @error="onSuspenseError">
       <template #default>
         <RouterView />
       </template>
-
       <template #fallback>
         <AppLoader />
       </template>
     </Suspense>
+
     <AppError v-if="suspenseError" :error="suspenseError" />
   </div>
 </template>
