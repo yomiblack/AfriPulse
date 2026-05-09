@@ -60,7 +60,7 @@ const routes = [
     component: favouritesView,
     beforeEnter: () => {
       const store = useCountriesStore();
-      if (store.favouriteCountries.length === 0) {
+      if (store.favouriteIds.length === 0) {
         return { name: 'countries' };
       }
     },
