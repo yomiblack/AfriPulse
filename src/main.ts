@@ -1,12 +1,17 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { router } from '@/router';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import App from './App.vue';
 import '@/assets/main.css';
 
 const app = createApp(App);
 
-app.use(createPinia()); // register Pinia globally — all stores now available
+const pinia = createPinia();
+
+pinia.use(piniaPluginPersistedstate);
+
+app.use(pinia);
 app.use(router); // register Vue Router
 
 app.mount('#app');

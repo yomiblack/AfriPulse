@@ -2,6 +2,8 @@
 import DarkModeToggle from '@/components/DarkModeToggle.vue';
 import AppLoader from './components/AppLoader.vue';
 import AppError from './components/AppError.vue';
+import CountriesSkelentonLoader from './components/CountriesSkelentonLoader.vue';
+import CountryDetailSkeletonLoader from './components/CountryDetailSkeletonLoader.vue';
 import { useDarkMode } from '@/composables/useDarkMode';
 import { Analytics } from '@vercel/analytics/vue';
 import { ref } from 'vue';
@@ -90,14 +92,20 @@ function onSuspenseError(err: unknown) {
 
     <CompareBar />
 
-    <Suspense @error="onSuspenseError">
-      <template #default>
-        <RouterView />
-      </template>
-      <template #fallback>
-        <AppLoader />
-      </template>
-    </Suspense>
+    <RouterView v-slot="{ Component, route }">
+      <Suspense @error="onSuspenseError">
+        <template #default>
+          <component :is="Component" :key="route.fullPath" />
+        </template>
+        <template #fallback>
+          <CountriesSkelentonLoader v-if="route.name === 'countries'" />
+          <CountryDetailSkeletonLoader
+            v-else-if="route.name === 'country-details'"
+          />
+          <AppLoader v-else />
+        </template>
+      </Suspense>
+    </RouterView>
 
     <AppError v-if="suspenseError" :error="suspenseError" />
   </div>
