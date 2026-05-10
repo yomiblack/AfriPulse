@@ -12,9 +12,23 @@ import { storeToRefs } from 'pinia';
 import { RouterLink } from 'vue-router';
 import { provideComparison } from '@/composables/useComparison';
 import CompareBar from './components/CompareBar.vue';
+import {
+  provideCommandPalette,
+  useCommandPalette,
+} from './composables/useCommandPalette';
+import { useEventListener } from './composables/useEventListener';
+import CommandPalette from './components/CommandPalette.vue';
 
 useDarkMode();
 provideComparison();
+const { open } = provideCommandPalette();
+
+useEventListener(window, 'keydown', (e: KeyboardEvent) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    open();
+  }
+});
 
 const store = useCountriesStore();
 const { favouriteCountries } = storeToRefs(store);
@@ -30,6 +44,7 @@ function onSuspenseError(err: unknown) {
   <div
     class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
   >
+    <CommandPalette />
     <nav
       class="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors"
     >
@@ -83,7 +98,33 @@ function onSuspenseError(err: unknown) {
           </div>
         </div>
 
-        <div class="shrink-0">
+        <div class="shrink-0 flex items-center gap-3">
+          <!-- Cmd+K trigger button -->
+          <button
+            @click="open"
+            class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl text-sm text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+          >
+            <svg
+              class="w-3.5 h-3.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"
+              />
+            </svg>
+            <span>Search</span>
+            <kbd
+              class="ml-1 inline-flex items-center gap-0.5 font-mono text-[10px] text-gray-400 dark:text-gray-500"
+            >
+              <span>⌘</span><span>K</span>
+            </kbd>
+          </button>
+
           <Analytics />
           <DarkModeToggle />
         </div>
