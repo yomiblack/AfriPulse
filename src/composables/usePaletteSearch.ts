@@ -17,8 +17,8 @@ function scoreCountry(
 
   const name = country.name.common.toLowerCase();
   const official = country.name.official.toLowerCase();
-  const capital = country.capital?.[0] ?? ''.toLowerCase();
-  const subregion = country.subregion ?? '';
+  const capital = (country.capital?.[0] ?? '').toLowerCase();
+  const subregion = (country.subregion ?? '').toLowerCase();
   const languages = Object.values(country.languages ?? {}).map((l) =>
     l.toLowerCase()
   );
